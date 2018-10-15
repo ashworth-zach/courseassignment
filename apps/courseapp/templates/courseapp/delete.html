@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courseapp/css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <th>course</th>
+        <th>description</th>
+        <th>created at</th>
+        <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.desc}}</td>
+            <td>{{course.created_at}}</td>
+            <td><a href="/courses/{{course.id}}/edit">edit</a></td>
+        </tr>
+    </table>
+    <h1>are you sure you wish to delete this course?</h1>
+    <button class="redbtn"><a href="/courses/{{course.id}}/deletecourse">YES</a></button>
+    <button class="greenbtn"><a href="/courses/">NO</a></button>
+</body>
+
+</html>
