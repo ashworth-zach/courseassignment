@@ -20,3 +20,8 @@ class Course(models.Model):
     # the old hidden objects key with a new one with extra properties!!!
     objects = CourseManager()
     # *************************
+class Comment(models.Model):
+    content = models.CharField(max_length=255)
+    course_id=models.ForeignKey(Course, related_name='comment')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

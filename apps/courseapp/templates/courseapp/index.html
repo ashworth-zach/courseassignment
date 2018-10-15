@@ -28,12 +28,14 @@
         <th>description</th>
         <th>created at</th>
         <th>delete</th>
+        <th>comment</th>
         <tr>
             {%for course in courses%}
             <td>{{course.name}}</td>
             <td>{{course.desc}}</td>
             <td>{{course.created_at}}</td>
             <td><a href="/courses/{{course.id}}/destroy">delete</a></td>
+            <td><a href="/courses/{{course.id}}/comment">comment</a></td>
         </tr>
 
             {%endfor%}

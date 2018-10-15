@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from .models import Course
+from .models import Course, Comment
 def index(request):
     context={
         'courses':Course.objects.all().values()
@@ -28,3 +28,23 @@ def deletecourse(request, course_id):
     course = Course.objects.get(id =course_id)
     course.delete()
     return redirect('/courses')
+def comment(request, courseid):
+    x= Comment.objects.filter(course_id=courseid)
+    if x:
+        context= {
+            'course':Course.objects.get(id=courseid),
+            'comments':Comment.objects.all().values().filter(course_id=courseid)
+        }
+        return render(request, 'courseapp/comment.html', context)
+    else:
+        context= {
+            'course':Course.objects.get(id=courseid),
+        }
+        return render(request, 'courseapp/comment.html', context)
+
+def newcomment(request, courseid):
+    print(request.POST['comment'])
+    course=Course.objects.get(id=courseid)
+    Comment.objects.create(content=request.POST['comment'], course_id=course)
+    redirectstr='/courses/'+str(courseid)+'/comment'
+    return redirect(redirectstr)
